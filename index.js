@@ -21,7 +21,7 @@ app.get("/", (req, res) => {
 
 app.post("/api/chat", async (req, res) => {
   try {
-    const { message } = req.body; // ✅ agora sim!
+    const { message } = req.body;
 
     const response = await openai.createChatCompletion({
       model: "gpt-3.5-turbo",
@@ -33,4 +33,10 @@ app.post("/api/chat", async (req, res) => {
     console.error("Erro na requisição:", error.message);
     res.status(500).json({ error: "Erro ao acessar a IA" });
   }
+});
+
+// ✅ Adicione isso ao final:
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`✅ Servidor rodando em: http://localhost:${PORT}`);
 });
